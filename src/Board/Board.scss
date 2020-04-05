@@ -17,7 +17,7 @@
     }
   }
   
-  @media only screen and (max-width: 700px) {
+  @include respond_to(tablet-and-smaller) {
     width: 100%;
 
     section {
