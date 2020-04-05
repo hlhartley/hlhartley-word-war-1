@@ -1,0 +1,18 @@
+.Board {
+  margin: 30px auto;
+  width: 90%;
+
+  .words__row {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: stretch;
+
+    section {
+      border: 1px solid black;
+      padding: 20% 10%;
+      text-align: center;
+      margin: 5%;
+    }
+  }
+}
