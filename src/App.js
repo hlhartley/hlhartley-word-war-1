@@ -8,14 +8,18 @@ import Timer from './Timer/Timer';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
         <h1>Word War I</h1>
+        <div className="buttons__container">
+          <button>New Game</button>
+          <button>Reset Game</button>
+        </div>
       </header>
-      <button>New Game</button>
-      <button>Reset Game</button>
-      <CardsRemaining />
-      <PlayerTurn />
-      <Timer />
+      <div className="dashboard__container">
+        <CardsRemaining />
+        <PlayerTurn />
+        <Timer />
+      </div>
       <Board />
     </div>
   );
