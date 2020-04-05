@@ -5,3 +5,8 @@
 @import './PlayerTurn/PlayerTurn.scss';
 @import './Timer/Timer.scss';
 @import './Board/Board.scss';
+
+* {
+  font-family: $regular-font;
+  font-size: 20px;
+}
