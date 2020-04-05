@@ -11,7 +11,8 @@ function App() {
       <header className="App-header">
         <h1>Word War I</h1>
       </header>
-      <button>End Game</button>
+      <button>New Game</button>
+      <button>Reset Game</button>
       <CardsRemaining />
       <PlayerTurn />
       <Timer />
