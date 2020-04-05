@@ -1,0 +1,117 @@
+// Media Query Variables
+$break_mobile_small: 320px;
+$break_mobile_small-2: 325px;
+$break_extra_small: 480px;
+$break_mobile_large: 580px;
+$break_small: 767px;
+$break_medium_2: 900px;
+$break_medium: 992px;
+$break_tablet_large: 1024px;
+$break_large: 1200px;
+$break_largest: 1575px;
+
+// Media Queries
+@mixin respond_to($media) {
+  @if $media == mobile-smallest {
+    @media only screen and (max-width: $break_mobile_small) { // 320px
+      @content;
+    }
+  }
+  @if $media == mobile-small {
+    @media only screen and (min-width: $break_mobile_small) and (max-width: $break_mobile_small-2) { // 320px to 375px
+      @content;
+    }
+  }
+  @if $media == mobile {
+    @media only screen and (max-width: $break_extra_small) { // 480px
+      @content;
+    }
+  }
+  @if $media == mobile-medium {
+    @media only screen and (max-width: $break_mobile_large - 1) { // 580px - 1px = 579px
+      @content;
+    }
+  }
+  @if $media == mobile-large {
+    @media only screen and (max-width: $break_small - 1) { // 767px - 1px = 766px
+      @content;
+    }
+  }
+  @if $media == tablet-small {
+    @media only screen and (max-width: $break_small + 1) { // 767px + 1px = 768px
+      @content;
+    }
+  } @else if $media == mobile-large-and-larger {
+    @media only screen and (max-width: $break_small) { // 767px
+      @content;
+    }
+  } @else if $media == tablet-landscape {
+    @media only screen and (min-width: $break_extra_small + 1) and (max-width: $break_large - 1) { // 767px + 1 px = 768px to 1200px - 1px = 1199px
+      @content;
+    }
+  } @else if $media == tablet-portrait {
+    @media only screen and (min-width: $break_extra_small + 1) and (max-width: $break_small - 1) { // 480px + 1px = 481px to 767px
+      @content;
+    }
+  } @else if $media == tablet-portrait-and-smaller {
+    @media only screen and (max-width: $break_extra_small - 1) { // 480px - 1px = 479px
+      @content;
+    }
+  } @else if $media == tablet-and-smaller {
+    @media only screen and (max-width: $break_medium - 1) { // 992px - 1px = 991px
+      @content;
+    }
+  } @else if $media == tablet-and-larger {
+    @media only screen and (max-width: $break_medium) { // 992px
+      @content;
+    }
+  } @else if $media == tablet-and-desktop {
+    @media only screen and (min-width: $break_medium_2) { // > 900px
+      @content;
+    }
+  } @else if $media == tablet-and-desktop-and-smaller {
+    @media only screen and (max-width: $break_medium_2) { // < 900px
+      @content;
+    }
+  } @else if $media == tablet {
+    @media only screen and (min-width: $break_small) and (max-width: $break_medium - 1) { // 767px to 992px - 1px = 991px
+      @content;
+    }
+  } @else if $media == tablet-large-and-smaller { // 1024px
+    @media only screen and (max-width: $break_tablet_large) {
+      @content;
+    }
+  } @else if $media == tablet-large {
+    @media only screen and (min-width: $break_tablet_large) and (max-width: $break_tablet_large + 1) { //1024px and 1024px + 1px = 1025px
+      @content;
+    }
+  } @else if $media == desktop-and-smaller {
+    @media only screen and (min-width: $break_large - 1) { // 1200px - 1px = 1199px
+      @content;
+    }
+  } @else if $media == small-desktop {
+    @media only screen and (min-width: $break_medium) and (max-width: $break_large - 1) { // 992px to 1200px - 1px = 1199px
+      @content;
+    }
+  } @else if $media == medium-desktop-and-smaller { // 1200px + 190px - 1px = 1389px
+    @media only screen and (min-width: $break_large + 190 - 1) {
+      @content;
+    }
+  } @else if $media == medium-desktop { // 1200px + 190px = 1390px
+    @media only screen and (min-width: $break_large + 190) { 
+      @content;
+    }
+  } @else if $media == desktop {
+    @media only screen and (min-width: $break_large) { // 1200px
+      @content;
+    }
+  } @else if $media == desktop-large {
+    @media only screen and (min-width: $break_large + 801) { // 1200px + 801px = 2001px
+      @content;
+    }
+  } @else if $media == desktop-largest { // 1575px
+    @media only screen and (min-width: $break_largest) {
+      @content;
+    }
+  }
+}
