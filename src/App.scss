@@ -30,8 +30,11 @@
   }
 
   .dashboard__container {
-    display: flex;
-    margin: -1.5% 0 0 11%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: auto;
+    text-align: center;
+    width: 80%;
   }
 
   @include respond_to(tablet-and-smaller) {

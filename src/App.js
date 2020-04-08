@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './main.scss';
 import Board from './Board/Board';
 import CardsRemaining from './CardsRemaining/CardsRemaining';
-import PlayerTurn from './PlayerTurn/PlayerTurn';
+import TeamTurn from './TeamTurn/TeamTurn';
 import Timer from './Timer/Timer';
+import { fetchData } from './Helpers/requests';
 
 function App() {
+  const [redCardCount, setRedCardCount] = useState(8);
+  const [blueCardCount, setBlueCardCount] = useState(9);
+  const [teamTurn, setTeamTurn] = useState('Red');
+  const [words, setWords] = useState([])
+
+  useEffect(async () => {
+    const result = await fetchData('22', 'GET');
+    console.log(result)
+    setWords(result.words)
+  }, []);
+
   return (
     <div className="App">
       <header>
         <h1>Word War I</h1>
         <div className="buttons__container">
-          <button>New Game</button>
-          <button>Reset Game</button>
+          <button type="button" className="btn btn-primary">New Game</button>
+          <button type="button" className="btn btn-primary">Reset Game</button>
         </div>
       </header>
       <div className="dashboard__container">
-        <CardsRemaining />
-        <PlayerTurn />
+        <CardsRemaining 
+          redCardCount={redCardCount}
+          blueCardCount={blueCardCount}
+        />
+        <TeamTurn 
+          teamTurn={teamTurn}
+        />
         <Timer />
       </div>
-      <Board />
+      <Board 
+        setRedCardCount={setRedCardCount}
+        setBlueCardCount={setBlueCardCount}
+        words={words}
+      />
     </div>
   );
 }
