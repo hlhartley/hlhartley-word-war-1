@@ -1,0 +1,15 @@
+.TeamTurn {
+  @include respond_to(tablet-and-smaller) {
+    font-size: $mobile-font-size;
+  }
+
+  .team-turn__text {
+    &.red {
+      color: $red-team-color;
+    }
+
+    &.blue {
+      color: $blue-team-color;
+    }
+  }
+}
