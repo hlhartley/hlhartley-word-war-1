@@ -2,4 +2,8 @@
   @include respond_to(tablet-and-smaller) {
     font-size: $mobile-font-size;
   }
+
+  button {
+    margin-left: 10px;
+  }
 }
