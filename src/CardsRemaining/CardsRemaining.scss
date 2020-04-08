@@ -2,4 +2,12 @@
   @include respond_to(tablet-and-smaller) {
     font-size: $mobile-font-size;
   }
+
+  .blue-card-count {
+    color: $blue-team-color;
+  }
+
+  .red-card-count {
+    color: $red-team-color;
+  }
 }
