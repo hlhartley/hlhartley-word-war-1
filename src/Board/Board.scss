@@ -14,6 +14,22 @@
       padding: 15% 5%;
       text-align: center;
       margin: 4%;
+
+      &.team_1 {
+        background-color: $red-team-color;
+      }
+
+      &.team_2 {
+        background-color: $blue-team-color;
+      }
+
+      &.bomb {
+        background-color: $bomb-color;
+      }
+
+      &.neutral {
+        background-color: $neutral-color;
+      }
     }
   }
   
