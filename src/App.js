@@ -7,8 +7,8 @@ import Timer from './Timer/Timer';
 import { fetchData } from './Helpers/requests';
 
 function App() {
-  const [redCardCount, setRedCardCount] = useState(8);
-  const [blueCardCount, setBlueCardCount] = useState(9);
+  const [redCardCount, setRedCardCount] = useState(0);
+  const [blueCardCount, setBlueCardCount] = useState(0);
   const [teamTurn, setTeamTurn] = useState('Red');
   const [words, setWords] = useState([])
 
@@ -16,6 +16,8 @@ function App() {
     const result = await fetchData('22', 'GET');
     console.log(result)
     setWords(result.words)
+    setRedCardCount(result.team_2_remaining_words);
+    setBlueCardCount(result.team_1_remaining_words);
   }, []);
 
   return (
