@@ -62,3 +62,21 @@ export const makeGuess = async ({ gameId, word }) => {
     return await response.json()
   }
 }
+
+
+export const createPlayer = async ({ gameId, team, playerName }) => {
+  let endpoint = `https://ndlqoav0w5.execute-api.us-west-2.amazonaws.com/dev/game/${gameId}/team/${team}/player/${playerName}/`
+  const response = await fetch(endpoint, 
+    {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+    })
+
+  if (response.status >= 300) {
+    throw new Error('Failed network request')
+  } else {
+    return await response.json()
+  }
+}
