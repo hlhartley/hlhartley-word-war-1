@@ -46,8 +46,8 @@ export const fetchData = async ({ method, gameId, data = null }) => {
   }
 }
 
-export const makeGuess = async ({ gameId, word }) => {
-  let endpoint = `https://ndlqoav0w5.execute-api.us-west-2.amazonaws.com/dev/game/${gameId}/guess/${word}`
+export const makeGuess = async ({ gameId, team, word }) => {
+  let endpoint = `https://ndlqoav0w5.execute-api.us-west-2.amazonaws.com/dev/game/${gameId}/team/${team}/guess/${word}`
   const response = await fetch(endpoint, 
     {
       method: 'POST',
@@ -57,7 +57,7 @@ export const makeGuess = async ({ gameId, word }) => {
     })
 
   if (response.status >= 300) {
-    throw new Error('Failed network request')
+    return "It's not your turn"
   } else {
     return await response.json()
   }

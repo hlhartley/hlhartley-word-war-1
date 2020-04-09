@@ -1,17 +1,122 @@
 .App {
-  h1 {
-    font-family: $title-font;
-    font-size: 50px;
-    display: inline-block;
-    letter-spacing: 0.4rem;
-    margin: 2% 0 2% 11%;
-    text-align: center;
+  .modal-screen {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    line-height: 3.5;
+
+    header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      
+      h1 {
+        margin: 0;
+      }
+
+    }
+    .buttons__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      button {
+        min-width: 200px;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 40%;
+
+      .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        }
+
+        .separator::before, .separator::after {
+          content: '';
+          flex: 1;
+          border-bottom: 1px solid #000;
+        }
+
+        .separator::before {
+          margin-right: .5em;
+        }
+
+        .separator::after {
+          margin-left: .5em;
+        }
+
+      .buttons__container {
+        flex-direction: row;
+
+        input {
+          margin-top: 10px;
+          min-width: 200px;
+        }
+      }
+
+      .team-members__container {
+        display: grid;
+        grid-gap: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        margin: 3% 0 5% 0;
+        min-height: 200px;
+        text-align: center;
+        
+        .red {
+          align-items: center;
+          background-color: $lightest-grey-color;
+          border: 1px solid $lighter-grey-color;
+          border-radius: .25rem;
+          color: $modal-grey-text-color;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+  
+        .blue {
+          align-items: center;
+          background-color: $lightest-grey-color;
+          border: 1px solid $lighter-grey-color;
+          border-radius: .25rem;
+          color: $modal-grey-text-color;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+    }
+    button {
+      min-width: 150px;
+      margin: 10px;
+    }
+      
+    label {
+      margin: 0 10px;
+      min-width: 150px;
+    }
   }
 
   header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    h1 {
+      font-family: $title-font;
+      font-size: 50px;
+      display: flex;
+      letter-spacing: 0.4rem;
+      text-align: center;
+    }
 
     .buttons__container {
       align-items: center;
@@ -31,7 +136,7 @@
 
   .dashboard__container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     margin: auto;
     text-align: center;
     width: 80%;

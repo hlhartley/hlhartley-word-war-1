@@ -7,7 +7,7 @@ function Timer() {
 
   return (
     <div className="Timer">
-      Timer: <span>{countDown}</span> seconds
+      <span>{countDown} seconds</span>
       <button type="button" className={timerOn ? "btn btn-outline-success" : "btn btn-outline-danger"}>{timerOn ? "start" : "stop"}</button>
     </div>
   );
