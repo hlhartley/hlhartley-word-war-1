@@ -8,7 +8,7 @@ function Timer() {
   return (
     <div className="Timer">
       <span>{countDown} seconds</span>
-      <button type="button" className={timerOn ? "btn btn-outline-success" : "btn btn-outline-danger"}>{timerOn ? "start" : "stop"}</button>
+      <button type="button" className={timerOn ? "btn btn-success" : "btn btn-danger"}>{timerOn ? "start" : "stop"}</button>
     </div>
   );
 }

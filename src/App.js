@@ -17,7 +17,7 @@ function App() {
   const [displayForm, toggleForm] = useState(false);
   const [playerName, setPlayerName] = useState('');
   const [team, setTeam] = useState('team_2');
-  const [role, setRole] = useState('player');
+  const [isSpymaster, setSpymaster] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const [redTeam, setRedTeam] = useState([]);
   const [blueTeam, setBlueTeam] = useState([]);
@@ -67,36 +67,32 @@ function App() {
     return (
       <form onSubmit={handleSubmit}>
         <div className="separator">Info</div>
-        <div className="buttons__container btn-group-toggle" data-toggle="buttons">
-          <label className="btn btn-secondary active">
-            <input type="radio" value="player" name="options" id="option1" className="btn btn-danger" autoComplete="off" defaultChecked onClick={(event) => setRole(event.target.value)} /><i className="fas fa-user"></i> Player
-          </label>
-          <span>OR</span>
-          <label className="btn btn-secondary">
-            <input type="radio" value="spymaster" name="options" id="option2" className="btn btn-danger" autoComplete="off" onClick={(event) => setRole(event.target.value)} /><i className="fas fa-user-secret"></i> Spymaster
-          </label>
-        </div>
-        <div className="team-members__container">
-          <div className="red">
-            <span>0 members</span>
-            <button type="button" value="team_1" className="btn btn-danger" onClick={(event) => setTeam(event.target.value)}><i className="far fa-flag"></i> Join team</button>
+        <div className="input-group">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="basic-addon1">Game Code</span>
           </div>
-          <div className="blue">
-            <span>0 members</span>
-            <button type="button" value="team_2" className="btn btn-primary" onClick={(event) => setTeam(event.target.value)}><i className="far fa-flag"></i> Join team</button>
-          </div>
+          <input type="text" name="gameId" value={gameId} className="form-control" aria-label="Game Code" aria-describedby="basic-addon1" onChange={(event) => setGameId(event.target.value)} onBlur={() => getGameData(gameId)}></input>
         </div>
-        <div className="input-group mb-3">
+        <div className="input-group">
           <div className="input-group-prepend">
             <span className="input-group-text" id="basic-addon1">Name</span>
           </div>
           <input type="text" value={playerName} name="name" className="form-control" aria-label="Name" aria-describedby="basic-addon1" onChange={(event) => setPlayerName(event.target.value)}></input>
         </div>
-        <div className="input-group mt-3 mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="basic-addon1">Game Code</span>
+        <div className="buttons__container">
+          <button type="button" value="false" name="options" id="option1" className="btn btn-outline-dark" autoComplete="off" onClick={(event) => setSpymaster(event.target.value)}><i className="fas fa-user"></i> Player</button>
+          <span>OR</span>
+          <button type="button" value="true" name="options" id="option2" className="btn btn-dark" autoComplete="off" onClick={(event) => setSpymaster(event.target.value)}><i className="fas fa-user-secret"></i> Spymaster</button>
+        </div>
+        <div className="team-members__container">
+          <div className="red">
+            <span>{redTeam.length > 0 ? `${redTeam.length} members` : `0 members`}</span>
+            <button type="button" value="team_1" className="btn btn-danger" onClick={(event) => setTeam(event.target.value)}><i className="far fa-flag"></i> Join team</button>
           </div>
-          <input type="text" name="gameId" value={gameId} className="form-control" aria-label="Game Code" aria-describedby="basic-addon1" onChange={(event) => setGameId(event.target.value)}></input>
+          <div className="blue">
+            <span>{blueTeam.length > 0 ? `${blueTeam.length} members` : `0 members`}</span>
+            <button type="button" value="team_2" className="btn btn-primary" onClick={(event) => setTeam(event.target.value)}><i className="far fa-flag"></i> Join team</button>
+          </div>
         </div>
         <div className="buttons__container">
           <input type="submit" value="Enter Game" className="btn btn-info" />
@@ -106,18 +102,19 @@ function App() {
   }
 
   function render() {
+    console.log(redTeam, blueTeam)
     if (!isModal) {
       return (
         <div>
           <header>
             <h1>Word War I</h1>
             <div className="buttons__container">
-              <button type="button" className="btn btn-success" onClick={() => setModal(true)}>New Game</button>
-              <button type="button" className="btn btn-primary" onClick={() => getGameData(gameId)}>Reset Game</button>
+              <button type="button" className="btn btn-info" onClick={() => setModal(true)}>New Game</button>
+              <button type="button" className="btn btn-outline-info" onClick={() => getGameData(gameId)}>Reset Game</button>
             </div>
           </header>
           <div className="dashboard__container">
-            { role === "spymaster" ? <div><i className="fas fa-user-secret"></i> <span>Spymaster</span></div> : <div><i className="fas fa-user"></i> <span>Player</span></div> }
+            { isSpymaster ? <div className="player-role"><i className="fas fa-user-secret"></i> <span>Spymaster</span></div> : <div className="player-role"><i className="fas fa-user"></i> <span>Player</span></div> }
             <CardsRemaining 
               redCardCount={redCardCount}
               blueCardCount={blueCardCount}

@@ -1,4 +1,8 @@
 .TeamTurn {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
   @include respond_to(tablet-and-smaller) {
     font-size: $mobile-font-size;
   }

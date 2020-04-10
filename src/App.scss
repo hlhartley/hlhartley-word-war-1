@@ -13,7 +13,7 @@
       justify-content: space-between;
       
       h1 {
-        margin: 0;
+        margin-left: 0;
       }
 
     }
@@ -56,17 +56,12 @@
 
       .buttons__container {
         flex-direction: row;
-
-        input {
-          margin-top: 10px;
-          min-width: 200px;
-        }
       }
 
       .team-members__container {
         display: grid;
         grid-gap: 15px;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         margin: 3% 0 5% 0;
         min-height: 200px;
         text-align: center;
@@ -93,10 +88,15 @@
           justify-content: center;
         }
       }
+
+      .input-group {
+        margin-bottom: 15px;
+      }
     }
+
     button {
-      min-width: 150px;
       margin: 10px;
+      min-width: 150px;
     }
       
     label {
@@ -115,6 +115,7 @@
       font-size: 50px;
       display: flex;
       letter-spacing: 0.4rem;
+      margin-left: 10%;
       text-align: center;
     }
 
@@ -142,6 +143,12 @@
     width: 80%;
   }
 
+  .player-role {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   @include respond_to(tablet-and-smaller) {
     h1 {
       font-size: 37px;
@@ -165,6 +172,37 @@
     .dashboard__container {
       flex-direction: column;
       margin-top: 10px;
+    }
+  }
+
+  @include respond_to(mobile) {
+    .modal-screen {
+      height: 100%;
+
+      header {
+        h1 {
+        font-size: 37px;
+        margin-top: 10px;
+        }
+      }
+      
+      form {
+        width: 90%;
+
+        .separator {
+          display: none;
+        }
+
+        .buttons__container {
+          input {
+            min-width: 0;
+          }
+        }
+
+        .team-members__container {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+      }
     }
   }
 }
