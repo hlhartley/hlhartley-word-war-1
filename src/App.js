@@ -114,7 +114,7 @@ function App() {
             </div>
           </header>
           <div className="dashboard__container">
-            { isSpymaster ? <div className="player-role"><i className="fas fa-user-secret"></i> <span>Spymaster</span></div> : <div className="player-role"><i className="fas fa-user"></i> <span>Player</span></div> }
+            { isSpymaster ? <div className={redTeam ? "red player-role" : "blue player-role"}><i className="fas fa-user-secret"></i> <span>Spymaster</span></div> : <div className={redTeam ? "red player-role" : "blue player-role"}><i className="fas fa-user"></i> <span>Player</span></div> }
             <CardsRemaining 
               redCardCount={redCardCount}
               blueCardCount={blueCardCount}

@@ -7,7 +7,8 @@ function Timer() {
 
   return (
     <div className="Timer">
-      <span>{countDown} seconds</span>
+      <i class="far fa-clock"></i>
+      <span>{countDown} s</span>
       <button type="button" className={timerOn ? "btn btn-success" : "btn btn-danger"}>{timerOn ? "start" : "stop"}</button>
     </div>
   );

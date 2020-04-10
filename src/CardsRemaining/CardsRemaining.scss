@@ -2,16 +2,28 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  
+
   @include respond_to(tablet-and-smaller) {
     font-size: $mobile-font-size;
   }
 
-  .blue-card-count {
-    color: $blue-team-color;
-  }
+  .card-count {
+    margin: 0 5px;
 
-  .red-card-count {
-    color: $red-team-color;
+    .fas {
+      margin-right: 1.5px;
+    }
+
+    &.blue {
+      color: $blue-team-color;
+    }
+
+    &.red {
+      color: $red-team-color;
+    }
+
+    &.bomb {
+      color: $bomb-color;
+    }
   }
 }

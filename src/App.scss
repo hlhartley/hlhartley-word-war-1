@@ -141,13 +141,26 @@
     margin: auto;
     text-align: center;
     width: 80%;
+    
+    .player-role {
+      display:flex;
+      align-items: center;
+      justify-content: center;
+
+      .fas {
+        margin: 0 5px;
+      }
+
+      &.red {
+        color: $red-team-color;
+      }
+
+      &.blue {
+        color: $blue-team-color;
+      }
+    }
   }
 
-  .player-role {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   @include respond_to(tablet-and-smaller) {
     h1 {

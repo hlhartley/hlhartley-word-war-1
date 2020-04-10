@@ -1,10 +1,15 @@
 .Timer {
-  display: flex;
   align-items: center;
+  color: $timer-color;
+  display: flex;
   justify-content: center;
 
   @include respond_to(tablet-and-smaller) {
     font-size: $mobile-font-size;
+  }
+
+  .far {
+    margin-right: 5px;
   }
 
   button {
