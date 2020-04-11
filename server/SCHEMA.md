@@ -1,19 +1,19 @@
-* GAME table
+* GAME
   * id
   * turn
 
-* WORD table
+* WORD
   * id
   * content
 
-* GAME_WORD table
+* GAME_WORD
   * id 
   * id_game 
   * id_word 
   * classifier 
   * is_guessed 
 
-* PLAYER table
+* PLAYER
   * id 
   * id_game 
   * name 
