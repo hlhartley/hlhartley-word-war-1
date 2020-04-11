@@ -4,7 +4,7 @@ import '../main.scss';
 function TeamTurn(props) {
   return (
     <div className="TeamTurn">
-      <span className={props.teamTurn === "Red" ? "red team-turn__text" : "blue team-turn__text"}><i class="fas fa-user-friends"></i>'s Turn</span>
+      <span className={props.teamTurn === "team_1" ? "team_1 team-turn__text" : "team_2 team-turn__text"}><i class="fas fa-user-friends"></i>'s Turn</span>
     </div>
   );
 }

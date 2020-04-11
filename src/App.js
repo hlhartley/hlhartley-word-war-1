@@ -4,63 +4,73 @@ import Board from './Board/Board';
 import CardsRemaining from './CardsRemaining/CardsRemaining';
 import TeamTurn from './TeamTurn/TeamTurn';
 import Timer from './Timer/Timer';
-import { fetchData } from './Helpers/requests';
-import { createPlayer } from './Helpers/requests';
+import { fetchData, createPlayer } from './Helpers/requests';
 
 function App() {
   const [gameId, setGameId] = useState();
   const [words, setWords] = useState([])
-  const [redCardCount, setRedCardCount] = useState(0);
-  const [blueCardCount, setBlueCardCount] = useState(0);
-  const [teamTurn, setTeamTurn] = useState('Red');
+  const [team1CardCount, setTeam1CardCount] = useState(0);
+  const [team2CardCount, setTeam2CardCount] = useState(0);
+  const [teamTurn, setTeamTurn] = useState();
   const [isModal, setModal] = useState(true);
   const [displayForm, toggleForm] = useState(false);
   const [playerName, setPlayerName] = useState('');
-  const [team, setTeam] = useState('team_2');
+  const [team, setTeam] = useState('team_1');
   const [isSpymaster, setSpymaster] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const [redTeam, setRedTeam] = useState([]);
-  const [blueTeam, setBlueTeam] = useState([]);
+  const [team_1, setTeam1] = useState([]); //red
+  const [team_2, setTeam2] = useState([]); //blue
+
+  useEffect(() => {
+    const socket = new WebSocket('wss://emkh1mv1x1.execute-api.us-west-2.amazonaws.com/dev/');
+    socket.addEventListener('open', function (event) {
+
+    });
+    socket.addEventListener('message', function (event) {
+      debugger
+    })
+  }, []);
 
   async function createNewGame() {
     const result = await fetchData({ method: 'POST' });
     setWords(result.words)
-    setRedCardCount(result.team_1_remaining_words);
-    setBlueCardCount(result.team_2_remaining_words);
+    setTeam1CardCount(result.team_1_remaining_words);
+    setTeam2CardCount(result.team_2_remaining_words);
     determineTeamTurn(result.current_turn);
-    setRedTeam(result.team_1);
-    setBlueTeam(result.team_2);
+    setTeam1(result.team_1);
+    setTeam2(result.team_2);
     setGameId(result.id_game);
   }
   
   async function getGameData(gameId) {
     const result = await fetchData({ method: 'GET', gameId });
-    setWords(result.words)
-    setRedCardCount(result.team_1_remaining_words);
-    setBlueCardCount(result.team_2_remaining_words);
+    setWords(result.words);
+    setTeam1CardCount(result.team_1_remaining_words);
+    setTeam2CardCount(result.team_2_remaining_words);
     determineTeamTurn(result.current_turn);
-    setRedTeam(result.team_1);
-    setBlueTeam(result.team_2);
+    setTeam1(result.team_1);
+    setTeam2(result.team_2);
     console.log(result)
   }
   
-  async function createNewPlayer() {
-    const result = await createPlayer({ gameId, team, playerName });
+  async function createNewPlayer(selectedTeam) {
+    await createPlayer({ gameId, team: selectedTeam, playerName, isSpymaster });
   }
 
   function determineTeamTurn(team) {
-    if (team === "team_1") {
-      setTeamTurn('Red')
-    } else {
-      setTeamTurn('Blue')
-    }
+    setTeamTurn(team);
   }
 
   function handleSubmit(event) {
     event.preventDefault()
-    createNewPlayer();
     getGameData(gameId);
     setModal(false);
+  }
+
+  async function joinTeam(selectedTeam) {
+    setTeam(selectedTeam);
+    await createNewPlayer(selectedTeam);
+    getGameData(gameId);
   }
 
   function showForm() {
@@ -80,18 +90,22 @@ function App() {
           <input type="text" value={playerName} name="name" className="form-control" aria-label="Name" aria-describedby="basic-addon1" onChange={(event) => setPlayerName(event.target.value)}></input>
         </div>
         <div className="buttons__container">
-          <button type="button" value="false" name="options" id="option1" className="btn btn-outline-dark" autoComplete="off" onClick={(event) => setSpymaster(event.target.value)}><i className="fas fa-user"></i> Player</button>
+          <button type="button" name="options" id="option1" className="btn btn-outline-dark" autoComplete="off" onClick={() => setSpymaster(false)}><i className="fas fa-user"></i> Player</button>
           <span>OR</span>
-          <button type="button" value="true" name="options" id="option2" className="btn btn-dark" autoComplete="off" onClick={(event) => setSpymaster(event.target.value)}><i className="fas fa-user-secret"></i> Spymaster</button>
+          <button type="button" name="options" id="option2" className="btn btn-outline-dark" autoComplete="off" onClick={() => setSpymaster(true)}><i className="fas fa-user-secret"></i> Spymaster</button>
         </div>
         <div className="team-members__container">
-          <div className="red">
-            <span>{redTeam.length > 0 ? `${redTeam.length} members` : `0 members`}</span>
-            <button type="button" value="team_1" className="btn btn-danger" onClick={(event) => setTeam(event.target.value)}><i className="far fa-flag"></i> Join team</button>
+          <div className="team_1">
+            <div>
+              {team_1.length === 0 ? <div>0 members</div> : team_1.map((member) => member.is_spymaster ? <div><i className="fas fa-user-secret"></i>{member.name}</div> : <div><i className="fas fa-user"></i>{member.name}</div>)}
+            </div>
+            <button type="button" value="team_1" className="btn btn-danger" onClick={(event) => joinTeam(event.target.value)}><i className="far fa-flag"></i> Join team {`(${team_1.length})`}</button>
           </div>
-          <div className="blue">
-            <span>{blueTeam.length > 0 ? `${blueTeam.length} members` : `0 members`}</span>
-            <button type="button" value="team_2" className="btn btn-primary" onClick={(event) => setTeam(event.target.value)}><i className="far fa-flag"></i> Join team</button>
+          <div className="team_2">
+            <div>
+              {team_2.length === 0 ? <div>0 members</div> : team_2.map((member) => member.is_spymaster ? <div><i className="fas fa-user-secret"></i>{member.name}</div> : <div><i className="fas fa-user"></i>{member.name}</div>)}
+            </div>
+            <button type="button" value="team_2" className="btn btn-primary" onClick={(event) => joinTeam(event.target.value)}><i className="far fa-flag"></i> Join team {`(${team_2.length})`}</button>
           </div>
         </div>
         <div className="buttons__container">
@@ -102,7 +116,6 @@ function App() {
   }
 
   function render() {
-    console.log(redTeam, blueTeam)
     if (!isModal) {
       return (
         <div>
@@ -114,10 +127,10 @@ function App() {
             </div>
           </header>
           <div className="dashboard__container">
-            { isSpymaster ? <div className={redTeam ? "red player-role" : "blue player-role"}><i className="fas fa-user-secret"></i> <span>Spymaster</span></div> : <div className={redTeam ? "red player-role" : "blue player-role"}><i className="fas fa-user"></i> <span>Player</span></div> }
+            { isSpymaster ? <div className={team_1 ? "team_1 player-role" : "team_2 player-role"}><i className="fas fa-user-secret"></i> <span>Spymaster</span></div> : <div className={team_1 ? "team_1 player-role" : "team_2 player-role"}><i className="fas fa-user"></i> <span>Player</span></div> }
             <CardsRemaining 
-              redCardCount={redCardCount}
-              blueCardCount={blueCardCount}
+              team1CardCount={team1CardCount}
+              team2CardCount={team2CardCount}
             />
             <TeamTurn 
               teamTurn={teamTurn}
@@ -126,11 +139,11 @@ function App() {
           </div>
           {errorMessage}
           <Board 
-            setRedCardCount={setRedCardCount}
-            setBlueCardCount={setBlueCardCount}
+            setTeam1CardCount={setTeam1CardCount}
+            setTeam2CardCount={setTeam2CardCount}
             words={words}
             gameId={gameId}
-            team={team}
+            team={teamTurn} // This should just be {team}
             getGameData={getGameData}
             setErrorMessage={setErrorMessage}
           />

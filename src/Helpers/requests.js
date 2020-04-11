@@ -64,8 +64,10 @@ export const makeGuess = async ({ gameId, team, word }) => {
 }
 
 
-export const createPlayer = async ({ gameId, team, playerName }) => {
-  let endpoint = `https://ndlqoav0w5.execute-api.us-west-2.amazonaws.com/dev/game/${gameId}/team/${team}/player/${playerName}/`
+export const createPlayer = async ({ gameId, team, playerName, isSpymaster }) => {
+  let endpoint = `https://ndlqoav0w5.execute-api.us-west-2.amazonaws.com/dev/game/${gameId}/team/${team}/player/${playerName}`
+  if (isSpymaster) endpoint += '?is_spymaster=true';
+
   const response = await fetch(endpoint, 
     {
       method: 'POST',

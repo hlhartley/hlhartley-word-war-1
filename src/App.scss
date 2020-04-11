@@ -64,28 +64,33 @@
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         margin: 3% 0 5% 0;
         min-height: 200px;
-        text-align: center;
         
-        .red {
-          align-items: center;
+        .team_1 { //red
           background-color: $lightest-grey-color;
           border: 1px solid $lighter-grey-color;
           border-radius: .25rem;
           color: $modal-grey-text-color;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: space-between;
+
+          div {
+            margin-left: 5%;
+          }
         }
   
-        .blue {
-          align-items: center;
+        .team_2 { //blue
           background-color: $lightest-grey-color;
           border: 1px solid $lighter-grey-color;
           border-radius: .25rem;
           color: $modal-grey-text-color;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: space-between;
+
+          div {
+            margin-left: 5%;
+          }
         }
       }
 
@@ -96,7 +101,6 @@
 
     button {
       margin: 10px;
-      min-width: 150px;
     }
       
     label {
@@ -151,11 +155,11 @@
         margin: 0 5px;
       }
 
-      &.red {
+      &.team_1 {
         color: $red-team-color;
       }
 
-      &.blue {
+      &.team_2 {
         color: $blue-team-color;
       }
     }

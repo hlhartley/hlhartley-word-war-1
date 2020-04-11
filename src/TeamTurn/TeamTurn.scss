@@ -8,11 +8,11 @@
   }
 
   .team-turn__text {
-    &.red {
+    &.team_1 {
       color: $red-team-color;
     }
 
-    &.blue {
+    &.team_2 {
       color: $blue-team-color;
     }
   }

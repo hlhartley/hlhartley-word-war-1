@@ -3,9 +3,9 @@ import '../main.scss';
 import { makeGuess } from '../Helpers/requests';
 
 function Board(props) {
-  const { gameId, team, getGameData, setErrorMessage } = props;
+  const { gameId, team, getGameData } = props;
   async function guessWord(word) {
-    const result = await makeGuess({ gameId, team, word });
+    await makeGuess({ gameId, team, word });
     getGameData(gameId)
   }
 
