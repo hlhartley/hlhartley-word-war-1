@@ -35,7 +35,7 @@ We are using a "serverless" setup utilizing AWS services. There are 2 Api Gatewa
   0. From the client app, you can do something like this to instantiate a socket connection:
   
       ```
-        const socket = new WebSocket('insert_url_here');
+        const socket = new WebSocket('wss://<some_websocket_url>');
         
         // To listen to messages from the server add an event listener:
         
