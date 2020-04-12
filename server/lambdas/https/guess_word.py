@@ -1,20 +1,7 @@
 import json
-from utils import BOMB, TEAM_1, TEAM_2, NEUTRAL, db_connection, get_word_guess, mark_word_as_guessed
-
+from utils import BOMB, TEAM_1, TEAM_2, NEUTRAL, db_connection, get_word_guess, mark_word_as_guessed, change_turns
 
 conn = db_connection()
-  
-def _change_turns(id_game, current_team, game_over=False):
-    if game_over:
-      turn = 'game_over'
-    else:
-      turn = TEAM_2 if current_team == TEAM_1 else TEAM_1
-    
-    cur = conn.cursor()
-    try:
-      cur.execute("UPDATE game SET turn = %s WHERE id = %s", (turn, id_game))
-    except Exception:
-      conn.rollback()
   
 def lambda_handler(event, context):
     id_game = None
@@ -51,7 +38,7 @@ def lambda_handler(event, context):
       }
     elif classifier == BOMB:
       mark_word_as_guessed(conn, id_game, id_word)
-      _change_turns(id_game, team, game_over=True)
+      change_turns(conn, id_game, team, game_over=True)
       conn.commit()
       return {
         'statusCode': 400,
@@ -60,7 +47,7 @@ def lambda_handler(event, context):
       }
     else:
       mark_word_as_guessed(conn, id_game, id_word)
-      _change_turns(id_game, team)
+      change_turns(conn, id_game, team)
       conn.commit()
       return {
           'statusCode': 200,
