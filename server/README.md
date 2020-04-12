@@ -18,14 +18,18 @@ We are using a "serverless" setup utilizing AWS services. There are 2 Api Gatewa
   3. To submit a word guess
   
       `POST /game/<idGame>/team/<idTeam>/guess/<word>`
+  
+  4. To force game to change turns (ex: timer runs out)
+
+      `POST /game/<idGame>/change-turn`
       
-  4. To add player to team (**deprecated**, use the WebSocket action instead)
+  5. To add player to team (**deprecated**, use the WebSocket action instead)
   
       `POST /game/<idGame>/team/<idTeam>/player/<idPlayer>`
       
       `POST /game/<idGame>/team/<idTeam>/player/<idPlayer>?is_spymaster=true` - for spymaster
   
-  5. To remove player (**deprecated**, use the WebSocket action instead)
+  6. To remove player (**deprecated**, use the WebSocket action instead)
   
       `DELETE /game/<idGame>/team/<idTeam>/player/<idPlayer>`
       
