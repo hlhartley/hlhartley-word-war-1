@@ -11,7 +11,17 @@ We are using a "serverless" setup utilizing AWS services. There are 2 Api Gatewa
 
 ## WebSocket events
 
-  0. From the client app, you can do something like this:
+  0. From the client app, you can do something like this to instantiate a socket connection:
+  
+      ```
+        const socket = new WebSocket('insert_url_here');
+        
+        // To listen to messages from the server add an event listener:
+        
+        socket.onmessage = function(event) {
+          console.log(JSON.parse(event.data))
+        }
+      ```
 
   1. To add player (action = addPlayer)
       
