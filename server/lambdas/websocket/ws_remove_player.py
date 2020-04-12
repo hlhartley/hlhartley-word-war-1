@@ -1,18 +1,8 @@
 import json
-import psycopg2
+from utils import db_connection
 
 
-host = ""
-db_user = ""
-db_password = ""
-db_name = ""
-
-conn = psycopg2.connect(
-  dbname=db_name,
-  user=db_user,
-  password=db_password,
-  host=host
-)
+conn = db_connection()
 
 def lambda_handler(event, context):
     connection_id = event.get("requestContext").get('connectionId')

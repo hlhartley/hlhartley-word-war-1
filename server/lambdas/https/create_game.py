@@ -1,33 +1,10 @@
 import json
-import psycopg2
 import random
+from utils import db_connection, BOMB, TEAM_1, TEAM_2, NEUTRAL, create_game
+
+conn = db_connection()
 
 
-BOMB = 'bomb'
-TEAM_1 = 'team_1'
-TEAM_2 = 'team_2'
-NEUTRAL = 'neutral'
-
-host = ""
-db_user = ""
-db_password = ""
-db_name = ""  
-
-conn = psycopg2.connect(
-  dbname=db_name,
-  user=db_user,
-  password=db_password,
-  host=host
-)
-
-def _create_game():
-  cur = conn.cursor()
-  try:
-    cur.execute("INSERT INTO game (turn) values (%s) RETURNING id", (TEAM_1,))
-    return cur.fetchone()[0]
-  except Exception:
-    conn.rollback()
-    
 def _populate_words(idGame):
   cur = conn.cursor()
   classifiers = [BOMB] + [TEAM_1]*9 + [TEAM_2]*8 + [NEUTRAL]*7
@@ -56,7 +33,7 @@ def _populate_words(idGame):
     conn.rollback()
 
 def lambda_handler(event, context):
-  id_game = _create_game()
+  id_game = create_game(conn)
   game_words = _populate_words(id_game)
   conn.commit()
   

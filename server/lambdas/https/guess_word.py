@@ -1,50 +1,9 @@
 import json
-import psycopg2
+from utils import BOMB, TEAM_1, TEAM_2, NEUTRAL, db_connection, get_word_guess, mark_word_as_guessed
 
-BOMB = 'bomb'
-TEAM_1 = 'team_1'
-TEAM_2 = 'team_2'
-NEUTRAL = 'neutral'
 
-host = ""
-db_user = ""
-db_password = ""
-db_name = ""
-
-conn = psycopg2.connect(
-  dbname=db_name,
-  user=db_user,
-  password=db_password,
-  host=host
-)
-
-def _perform_query(id_game, word):
-  cur = conn.cursor()
-  try:
-    cur.execute("""
-      SELECT game.turn, game_word.id_word, game_word.is_guessed, game_word.classifier 
-      FROM game_word 
-      JOIN word ON game_word.id_word = word.id
-      JOIN game on game_word.id_game = game.id
-      WHERE id_game = %s 
-      AND word.content = %s;
-    """, (id_game, word,))
-    return cur.fetchone()
-  except Exception:
-    conn.rollback()
+conn = db_connection()
   
-def _mark_word_as_guessed(id_game, id_word):
-    cur = conn.cursor()
-    try:
-      cur.execute(""" 
-        UPDATE game_word 
-        SET is_guessed = true
-        WHERE id_game = %s 
-        AND id_word = %s;
-      """, (id_game, id_word,))
-    except Exception:
-      conn.rollback()
-
 def _change_turns(id_game, current_team, game_over=False):
     if game_over:
       turn = 'game_over'
@@ -67,7 +26,7 @@ def lambda_handler(event, context):
       team = pathParameters.get('idTeam')
       word = pathParameters.get('word')
       
-    row = _perform_query(id_game, word)
+    row = get_word_guess(conn, id_game, word)
     
     if not row:
       return {
@@ -91,7 +50,7 @@ def lambda_handler(event, context):
         'body': json.dumps({'message': f"{word} has already been guessed"}),
       }
     elif classifier == BOMB:
-      _mark_word_as_guessed(id_game, id_word)
+      mark_word_as_guessed(conn, id_game, id_word)
       _change_turns(id_game, team, game_over=True)
       conn.commit()
       return {
@@ -100,7 +59,7 @@ def lambda_handler(event, context):
         'body': json.dumps({'message': "OH NO!! BOOM"}),
       }
     else:
-      _mark_word_as_guessed(id_game, id_word)
+      mark_word_as_guessed(conn, id_game, id_word)
       _change_turns(id_game, team)
       conn.commit()
       return {
