@@ -1,4 +1,5 @@
 import json
+from urllib import parse
 from utils import BOMB, TEAM_1, TEAM_2, NEUTRAL, db_connection, get_word_guess, mark_word_as_guessed, change_turns
 
 conn = db_connection()
@@ -11,7 +12,7 @@ def lambda_handler(event, context):
     if pathParameters:
       id_game = pathParameters.get('idGame')
       team = pathParameters.get('idTeam')
-      word = pathParameters.get('word')
+      word = parse.unquote(pathParameters.get('word', ''))
       
     row = get_word_guess(conn, id_game, word)
     
