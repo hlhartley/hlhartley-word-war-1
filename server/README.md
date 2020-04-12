@@ -5,9 +5,29 @@ We are using a "serverless" setup utilizing AWS services. There are 2 Api Gatewa
 1) HTTPS API Gateway --> Lambda --> RDS(Postgres)
 2) Websocket API Gateway --> Lambda --> RDS(Postgres)
 
-## HTTP endpoints
+## HTTPS endpoints
 
-  Will document
+  1. To create game
+      
+      `POST /game`
+      
+  2. To get game data
+  
+      `GET /game/<idGame>`
+      
+  3. To submit a word guess
+  
+      `POST /game/<idGame>/team/<idTeam>/guess/<word>`
+      
+  4. To add player to team (deprecated, use the WebSocket action instead)
+  
+      `POST /game/<idGame>/team/<idTeam>/player/<idPlayer>`
+      `POST /game/<idGame>/team/<idTeam>/player/<idPlayer>?is_spymaster=true` - for spymaster
+  
+  5. To remove player (deprecated, use the WebSocket action instead)
+  
+      `DELETE /game/<idGame>/team/<idTeam>/player/<idPlayer>`
+      
 
 ## WebSocket events
 
