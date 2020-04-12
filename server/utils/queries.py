@@ -20,15 +20,14 @@ def populate_words(conn, id_game):
     game_words = []
   
     for i, word in enumerate(words):
-      classifier = classifiers.pop()
       cur.execute(
         "INSERT INTO game_word (id_game, id_word, classifier, is_guessed) VALUES (%s, %s, %s, %s) RETURNING id",
-        (id_game, word[0], classifier, False)
+        (id_game, word[0], classifiers.pop(), False)
       )
       game_words.append({
         "id": cur.fetchone()[0],
         "text": word[1],
-        "classifier": classifier,
+        "classifier": None,
         "is_guessed": False,
       })
     return game_words   
