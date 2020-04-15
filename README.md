@@ -1,6 +1,6 @@
 ## Screenshots
-![Create Game Screenshot]()
-![Game Board Screenshot]()
+![Create Game Screenshot](create-game-page-screenshot.png)
+![Game Board Screenshot](game-board-screenshot.png)
 
 ## Available Scripts
 
