@@ -31,6 +31,7 @@ Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
 - Make responsive and mobile friendly
 - Add styling for Game Board (spymaster view)
 - Connect Websockets
+- User testing!!
 
 ## Future Iterations
 - Add Timer functionality
