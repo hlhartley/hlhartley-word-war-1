@@ -25,10 +25,10 @@ We wanted to create a strategic, fun, online game for people to play (especially
 ## Backend README
 Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
 
-## ToDo:
+## To Do:
 - Make responsive and mobile friendly
 - Add styling for Game Board (spymaster view)
-- Connect Websockets
+- Connect Websockets on frontend
 - Add rules section
 - User testing!!
 
