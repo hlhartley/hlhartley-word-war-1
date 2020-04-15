@@ -14,15 +14,12 @@ We wanted to create a strategic, fun, online game for people to play (especially
 - [Heather Hartley (Frontend)](https://github.com/hlhartley)
 - [Lee Chow (Backend)](https://github.com/leepuppychow)
 
-## Frontend Technologies
-- React
-- React Hooks
-
-## Backend Technologies
-- Python
-- Websockets
-- "Serverless" setup utilizing AWS services
-- 2 API Gateways: HTTPS API Gateway --> Lambda --> RDS(Postgres) & Websocket API Gateway --> Lambda --> RDS(Postgres)
+## Technologies Used
+- React (frontend)
+- React Hooks (frontend)
+- Python (backend)
+- Websockets (backend)
+- "Serverless" setup utilizing AWS services (backend) => 2 API Gateways: HTTPS API Gateway --> Lambda --> RDS(Postgres) & Websocket API Gateway --> Lambda --> RDS(Postgres)
 
 ## Backend README
 Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
