@@ -7,7 +7,7 @@ We wanted to create an online game for people to play similar to the game "Coden
 *Create Game Page*
 ![Create Game Screenshot](create-game-page-screenshot.png)
 
-*Game Board Page*
+*Game Board Page (player view)*
 ![Game Board Screenshot](game-board-screenshot.png)
 
 ## Collaborators
