@@ -5,7 +5,7 @@ We are using a "serverless" setup utilizing AWS services. There are 2 Api Gatewa
 1) REST API Gateway --> Lambda --> RDS(Postgres)
 2) WebSocket API Gateway --> Lambda --> RDS(Postgres)
 
-## HTTPS endpoints
+## REST endpoints
 
   1. To create game
       
