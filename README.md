@@ -18,7 +18,7 @@ We wanted to create a strategic, fun, online game for people to play (especially
 - React (frontend)
 - React Hooks (frontend)
 - Python (backend)
-- Websockets (backend)
+- Websockets (frontend & backend)
 - "Serverless" setup utilizing AWS services (backend) => 2 API Gateways: HTTPS API Gateway --> Lambda --> RDS(Postgres) & Websocket API Gateway --> Lambda --> RDS(Postgres)
 
 ## Backend README
