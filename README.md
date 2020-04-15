@@ -1,7 +1,7 @@
 **- APP DEVELOPMENT STILL IN PROGRESS -**
 
 ## Description
-We wanted to create an online game for people to play similar to the game "Codenames", while leveling up our coding skills at the same time! Rules section - coming soon!
+We wanted to create a strategic, fun, online game for people to play (especially during the COVID-19 pandemic), while leveling up our coding skills at the same time! Rules section - coming soon!
 
 ## Screenshots
 *Create Game Page*
@@ -31,6 +31,7 @@ Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
 - Make responsive and mobile friendly
 - Add styling for Game Board (spymaster view)
 - Connect Websockets
+- Add rules section
 - User testing!!
 
 ## Future Iterations
