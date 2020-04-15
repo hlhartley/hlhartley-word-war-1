@@ -17,6 +17,7 @@ We wanted to create an online game for people to play similar to the game "Coden
 - React Hooks
 
 ## Backend Technologies
+- Python
 - "Serverless" setup utilizing AWS services
 - Websockets
 - 2 API Gateways: HTTPS API Gateway --> Lambda --> RDS(Postgres) & Websocket API Gateway --> Lambda --> RDS(Postgres)
