@@ -1,3 +1,5 @@
+-- APP DEVELOPMENT STILL IN PROGRESS --
+
 ## Description
 We wanted to create an online game for people to play similar to the game "Codenames", while leveling up our coding skills at the same time! Rules section - coming soon!
 
@@ -26,3 +28,4 @@ We wanted to create an online game for people to play similar to the game "Coden
 Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
 
 ## Future Iterations
+- Add Timer functionality
