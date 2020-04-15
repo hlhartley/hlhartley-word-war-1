@@ -31,6 +31,7 @@ Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
 - Connect Websockets on frontend
 - Add rules section
 - User testing!!
+- Deploy to prod
 
 ## Future Iterations
 - Add Timer functionality
