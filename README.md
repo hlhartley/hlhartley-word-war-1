@@ -20,6 +20,7 @@ We wanted to create a strategic, fun, online game for people to play (especially
 - Python (backend)
 - Websockets (frontend & backend)
 - "Serverless" setup utilizing AWS services (backend) => 2 API Gateways: HTTPS API Gateway --> Lambda --> RDS(Postgres) & Websocket API Gateway --> Lambda --> RDS(Postgres)
+- Trello (for planning & organization)
 
 ## Backend README
 Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
