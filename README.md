@@ -27,5 +27,10 @@ We wanted to create an online game for people to play similar to the game "Coden
 ## Backend README
 Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
 
+## ToDo:
+- Make responsive and mobile friendly
+- Add styling for Game Board (spymaster view)
+- Connect Websockets
+
 ## Future Iterations
 - Add Timer functionality
