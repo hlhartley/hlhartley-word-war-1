@@ -5,7 +5,7 @@ import CardsRemaining from './CardsRemaining/CardsRemaining';
 import TeamTurn from './TeamTurn/TeamTurn';
 import Timer from './Timer/Timer';
 import { fetchData, createPlayer } from './Helpers/requests';
-import { socket, addPlayer, removePlayer, getGameData } from './Helpers/socket';
+import { socket, createPlayerConnection, removePlayer, getGameData } from './Helpers/socket';
 
 function App() {
   const [gameId, setGameId] = useState();
@@ -21,20 +21,16 @@ function App() {
   const [errorMessage, setErrorMessage] = useState();
   const [team_1, setTeam1] = useState([]); //red
   const [team_2, setTeam2] = useState([]); //blue
+  const [connectionId, setConnectionId] = useState('');
 
   useEffect(() => {
     socket.addEventListener('message', function (event) {
-      let data = null; 
-      
-      try {
-        data = JSON.parse(event.data);
-      } catch (error) {
-        console.error(error);
-      }
+      const data = JSON.parse(event.data);
 
-      debugger
-
-      if (data) {
+      if (data.type === 'ADD_CONNECTION') {
+        setConnectionId(data.connection_id)
+        getGameData(data.id_game)
+      } else if (data.type === 'GET_GAME_DATA') {
         setWords(data.words);
         setTeam1CardCount(data.team_1_remaining_words);
         setTeam2CardCount(data.team_2_remaining_words);
@@ -55,22 +51,12 @@ function App() {
     setTeam1(result.team_1);
     setTeam2(result.team_2);
     setGameId(result.id_game);
+    createPlayerConnection(result.id_game);
   }
   
-  // async function getGameData(gameId) {
-  //   const result = await fetchData({ method: 'GET', gameId });
-  //   setWords(result.words);
-  //   setTeam1CardCount(result.team_1_remaining_words);
-  //   setTeam2CardCount(result.team_2_remaining_words);
-  //   determineTeamTurn(result.current_turn);
-  //   setTeam1(result.team_1);
-  //   setTeam2(result.team_2);
-  //   console.log(result)
-  // }
-  
-  // async function createNewPlayer(selectedTeam) {
-  //   await createPlayer({ gameId, team: selectedTeam, playerName, isSpymaster });
-  // }
+  async function createNewPlayer(selectedTeam) {
+    await createPlayer({ gameId, team: selectedTeam, playerName, isSpymaster, connectionId });
+  }
 
   function determineTeamTurn(team) {
     setTeamTurn(team);
@@ -82,15 +68,9 @@ function App() {
     setModal(false);
   }
 
-  // async function joinTeam(selectedTeam) {
-  //   setTeam(selectedTeam);
-  //   await createNewPlayer(selectedTeam);
-  //   getGameData(gameId);
-  // }
-  
   async function joinTeam(selectedTeam) {
     setTeam(selectedTeam);
-    await addPlayer(gameId, playerName, selectedTeam, isSpymaster);
+    await createNewPlayer(selectedTeam);
     getGameData(gameId);
   }
 
@@ -102,7 +82,16 @@ function App() {
           <div className="input-group-prepend">
             <span className="input-group-text" id="basic-addon1">Game Code</span>
           </div>
-          <input type="text" name="gameId" value={gameId} className="form-control" aria-label="Game Code" aria-describedby="basic-addon1" onChange={(event) => setGameId(event.target.value)} onBlur={() => getGameData(gameId)}></input>
+          <input 
+            type="text" 
+            name="gameId" 
+            value={gameId} 
+            className="form-control" 
+            aria-label="Game Code" 
+            aria-describedby="basic-addon1" 
+            onChange={(event) => setGameId(event.target.value)} 
+            onBlur={() => createPlayerConnection(gameId)}
+          ></input>
         </div>
         <div className="input-group">
           <div className="input-group-prepend">
