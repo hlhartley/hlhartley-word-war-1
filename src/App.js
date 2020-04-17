@@ -25,9 +25,9 @@ function App() {
 
   useEffect(() => {
     socket.addEventListener('message', function (event) {
-      console.log(event.data)
-      
       const data = JSON.parse(event.data);
+
+      console.log(data)
 
       if (data.type === 'ADD_CONNECTION') {
         setConnectionId(data.connection_id)
@@ -50,6 +50,7 @@ function App() {
 
   async function createNewGame() {
     const result = await fetchData({ method: 'POST' });
+    createPlayerConnection(result.id_game);
     setWords(result.words)
     setTeam1CardCount(result.team_1_remaining_words);
     setTeam2CardCount(result.team_2_remaining_words);
@@ -57,7 +58,6 @@ function App() {
     setTeam1(result.team_1);
     setTeam2(result.team_2);
     setGameId(result.id_game);
-    createPlayerConnection(result.id_game);
   }
   
   async function createNewPlayer(selectedTeam) {
