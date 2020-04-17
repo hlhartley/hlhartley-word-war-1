@@ -19,6 +19,7 @@ We wanted to create a strategic, fun, online game for people to play (especially
 ## Technologies Used
 - React (frontend)
 - React Hooks (frontend)
+- Netlify
 - Python (backend)
 - Websockets (frontend & backend)
 - AWS: API Gateway (REST and WebSocket API), Lambda, RDS (PostgreSQL)
