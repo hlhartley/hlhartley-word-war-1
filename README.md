@@ -1,5 +1,7 @@
 **- APP DEVELOPMENT STILL IN PROGRESS -**
 
+[Live site](http://word-war1.s3-website-us-west-2.amazonaws.com/)
+
 ## Description
 We wanted to create a strategic, fun, online game for people to play (especially during the COVID-19 pandemic), while leveling up our coding skills at the same time! Rules section - coming soon!
 
