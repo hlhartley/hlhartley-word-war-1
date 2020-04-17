@@ -79,13 +79,27 @@ def get_game_players(conn, id_game):
   except Exception:
     conn.rollback()
 
-def add_player_to_game(conn, id_game, id_player, is_spymaster, team, connection_id=None):
+def add_connection_to_game(conn, id_game, connection_id):
+  cur = conn.cursor()
+  try:
+    cur.execute(
+      "INSERT INTO player (id_game, connection_id) VALUES (%s, %s)", 
+      (id_game, connection_id)
+    )
+  except Exception:
+    conn.rollback()
+
+def add_player_to_game(conn, id_game, id_player, is_spymaster, team, connection_id):
   cur = conn.cursor()
   try:
     cur.execute("""
-      INSERT INTO player (id_game, name, is_spymaster, team, connection_id)
-      VALUES (%s, %s, %s, %s, %s)
-    """, (id_game, id_player, is_spymaster, team, connection_id))
+      UPDATE player 
+      SET 
+        name = %s,
+        team = %s,
+        is_spymaster = %s
+      WHERE id_game = %s AND connection_id = %s
+    """, (id_player, team, is_spymaster, id_game, connection_id))
   except Exception:
     conn.rollback()
 
