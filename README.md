@@ -1,6 +1,6 @@
 **- APP DEVELOPMENT STILL IN PROGRESS -**
 
-[Play Game :)](http://word-war1.s3-website-us-west-2.amazonaws.com/)
+[Play Game :)](https://ecstatic-lalande-0e780a.netlify.app/)
 
 ## Description
 We wanted to create a strategic, fun, online game for people to play (especially during the COVID-19 pandemic), while leveling up our coding skills at the same time! Rules section - coming soon!
