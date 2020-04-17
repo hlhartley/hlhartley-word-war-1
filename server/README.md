@@ -51,10 +51,7 @@ We are using a "serverless" setup utilizing AWS services. There are 2 Api Gatewa
   1. To create a connection to a game (action = addPlayer). Server will return the connection_id and game_id.
       
       ```
-        socket.send(JSON.stringify({
-          "action": "addPlayer", 
-          "gameId": 84,
-        }))  
+        socket.send(JSON.stringify({ "action": "addPlayer", "gameId": 84 }))  
       ```
   
   2. To remove player (action = removePlayer)
