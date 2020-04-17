@@ -15,6 +15,7 @@ def _generate_body(query_results, id_game, all_players, is_spymaster=False):
   current_turn = get_current_turn(conn, id_game)
 
   return {
+    'type': "GET_GAME_DATA",
     'id_game': id_game,
     "current_turn": current_turn,
     "winner": check_winner(team_1_count, team_2_count),
@@ -34,11 +35,13 @@ def _send_data_to(all_players, id_game, query_results):
     connection_id = player.get('connection_id')
     body = spymaster_body if player.get('is_spymaster') else player_body
     
-    if (connection_id):
+    try:
         gatewayapi.post_to_connection(
           ConnectionId=connection_id,
           Data=json.dumps(body).encode('utf-8'),
         )
+    except Exception:
+      continue
   
 def lambda_handler(event, context):
     body = json.loads(event.get("body", {}))
