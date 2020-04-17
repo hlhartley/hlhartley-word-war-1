@@ -40,6 +40,10 @@ function App() {
       }
 
     })
+
+    window.addEventListener("beforeunload", function() {
+      removePlayer();
+    })
   }, []);
 
   async function createNewGame() {
