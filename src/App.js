@@ -25,6 +25,8 @@ function App() {
 
   useEffect(() => {
     socket.addEventListener('message', function (event) {
+      console.log(event.data)
+      
       const data = JSON.parse(event.data);
 
       if (data.type === 'ADD_CONNECTION') {
@@ -134,6 +136,7 @@ function App() {
       return (
         <div>
           <header>
+            <h1>HI THERE</h1>
             <h1>Word War I</h1>
             <div className="buttons__container">
               <button type="button" className="btn btn-info" onClick={() => setModal(true)}>New Game</button>
