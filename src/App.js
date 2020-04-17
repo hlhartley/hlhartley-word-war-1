@@ -136,7 +136,6 @@ function App() {
       return (
         <div>
           <header>
-            <h1>HI THERE</h1>
             <h1>Word War I</h1>
             <div className="buttons__container">
               <button type="button" className="btn btn-info" onClick={() => setModal(true)}>New Game</button>
