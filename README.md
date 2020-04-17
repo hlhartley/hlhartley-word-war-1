@@ -29,3 +29,5 @@ Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
 
 ## Future Iterations
 - Add Timer functionality
+- Other language support
+- Chat service?
