@@ -1,20 +1,21 @@
 import json
-from utils import add_player_to_game, check_existing_spymaster, db_connection
+import boto3
+from utils import add_connection_to_game, db_connection
 
-
+WS_URL = ""
 conn = db_connection()
 
 def lambda_handler(event, context):
     connection_id = event.get("requestContext").get('connectionId')
     body = json.loads(event.get("body"))
     id_game = body.get('gameId')
-    id_player = body.get('playerId')
-    team = body.get('team')
-    is_spymaster = body.get('isSpymaster', False)
-      
-    if is_spymaster and check_existing_spymaster(conn, id_game, team):
-      return {'statusCode': 400}
-    else:
-      add_player_to_game(conn, id_game, id_player, is_spymaster, team, connection_id)
-      conn.commit()
-      return {'statusCode': 200}
+    add_connection_to_game(conn, id_game, connection_id)
+    conn.commit()
+
+    gatewayapi = boto3.client("apigatewaymanagementapi", endpoint_url=WS_URL)
+    gatewayapi.post_to_connection(
+      ConnectionId=connection_id,
+      Data=json.dumps({"connection_id": connection_id}).encode('utf-8'),
+    )
+
+    return {'statusCode': 200}
