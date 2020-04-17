@@ -5,6 +5,7 @@ import CardsRemaining from './CardsRemaining/CardsRemaining';
 import TeamTurn from './TeamTurn/TeamTurn';
 import Timer from './Timer/Timer';
 import { fetchData, createPlayer } from './Helpers/requests';
+import { socket, addPlayer, removePlayer, getGameData } from './Helpers/socket';
 
 function App() {
   const [gameId, setGameId] = useState();
@@ -22,12 +23,26 @@ function App() {
   const [team_2, setTeam2] = useState([]); //blue
 
   useEffect(() => {
-    const socket = new WebSocket('wss://emkh1mv1x1.execute-api.us-west-2.amazonaws.com/dev/');
-    socket.addEventListener('open', function (event) {
-
-    });
     socket.addEventListener('message', function (event) {
+      let data = null; 
+      
+      try {
+        data = JSON.parse(event.data);
+      } catch (error) {
+        console.error(error);
+      }
+
       debugger
+
+      if (data) {
+        setWords(data.words);
+        setTeam1CardCount(data.team_1_remaining_words);
+        setTeam2CardCount(data.team_2_remaining_words);
+        determineTeamTurn(data.current_turn);
+        setTeam1(data.team_1);
+        setTeam2(data.team_2);
+      }
+
     })
   }, []);
 
@@ -42,20 +57,20 @@ function App() {
     setGameId(result.id_game);
   }
   
-  async function getGameData(gameId) {
-    const result = await fetchData({ method: 'GET', gameId });
-    setWords(result.words);
-    setTeam1CardCount(result.team_1_remaining_words);
-    setTeam2CardCount(result.team_2_remaining_words);
-    determineTeamTurn(result.current_turn);
-    setTeam1(result.team_1);
-    setTeam2(result.team_2);
-    console.log(result)
-  }
+  // async function getGameData(gameId) {
+  //   const result = await fetchData({ method: 'GET', gameId });
+  //   setWords(result.words);
+  //   setTeam1CardCount(result.team_1_remaining_words);
+  //   setTeam2CardCount(result.team_2_remaining_words);
+  //   determineTeamTurn(result.current_turn);
+  //   setTeam1(result.team_1);
+  //   setTeam2(result.team_2);
+  //   console.log(result)
+  // }
   
-  async function createNewPlayer(selectedTeam) {
-    await createPlayer({ gameId, team: selectedTeam, playerName, isSpymaster });
-  }
+  // async function createNewPlayer(selectedTeam) {
+  //   await createPlayer({ gameId, team: selectedTeam, playerName, isSpymaster });
+  // }
 
   function determineTeamTurn(team) {
     setTeamTurn(team);
@@ -67,9 +82,15 @@ function App() {
     setModal(false);
   }
 
+  // async function joinTeam(selectedTeam) {
+  //   setTeam(selectedTeam);
+  //   await createNewPlayer(selectedTeam);
+  //   getGameData(gameId);
+  // }
+  
   async function joinTeam(selectedTeam) {
     setTeam(selectedTeam);
-    await createNewPlayer(selectedTeam);
+    await addPlayer(gameId, playerName, selectedTeam, isSpymaster);
     getGameData(gameId);
   }
 
@@ -144,7 +165,6 @@ function App() {
             words={words}
             gameId={gameId}
             team={teamTurn} // This should just be {team}
-            getGameData={getGameData}
             setErrorMessage={setErrorMessage}
           />
         </div>

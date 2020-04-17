@@ -1,12 +1,13 @@
 import React from 'react';
 import '../main.scss';
 import { makeGuess } from '../Helpers/requests';
+import { getGameData } from '../Helpers/socket';
 
 function Board(props) {
-  const { gameId, team, getGameData } = props;
+  const { gameId, team } = props;
   async function guessWord(word) {
     await makeGuess({ gameId, team, word });
-    getGameData(gameId)
+    getGameData(gameId);
   }
 
   return (
