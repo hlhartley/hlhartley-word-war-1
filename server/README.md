@@ -23,11 +23,11 @@ We are using a "serverless" setup utilizing AWS services. There are 2 Api Gatewa
 
       `POST /game/<idGame>/change-turn`
       
-  5. To add player to team (**deprecated**, use the WebSocket action instead)
+  5. To add player to team
   
-      `POST /game/<idGame>/team/<idTeam>/player/<idPlayer>`
+      `POST /game/<idGame>/team/<idTeam>/player/<idPlayer>?connection_id=<CONNECTION_ID>`
       
-      `POST /game/<idGame>/team/<idTeam>/player/<idPlayer>?is_spymaster=true` - for spymaster
+      `POST /game/<idGame>/team/<idTeam>/player/<idPlayer>?connection_id=<CONNECTION_ID>&is_spymaster=true` - for spymaster
   
   6. To remove player (**deprecated**, use the WebSocket action instead)
   
@@ -48,15 +48,12 @@ We are using a "serverless" setup utilizing AWS services. There are 2 Api Gatewa
         }
       ```
 
-  1. To add player (action = addPlayer)
+  1. To create a connection to a game (action = addPlayer). Server will return the connection_id and game_id.
       
       ```
         socket.send(JSON.stringify({
           "action": "addPlayer", 
           "gameId": 84,
-          "playerId": "Boolean",
-          "team": "team_1",
-          "isSpymaster": true,
         }))  
       ```
   
