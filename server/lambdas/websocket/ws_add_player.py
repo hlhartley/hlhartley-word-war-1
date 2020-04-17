@@ -11,11 +11,20 @@ def lambda_handler(event, context):
     id_game = body.get('gameId')
     add_connection_to_game(conn, id_game, connection_id)
     conn.commit()
+    
+    data = {
+      "connection_id": connection_id,
+      "id_game": id_game,
+      "type": "ADD_CONNECTION"
+    }
 
     gatewayapi = boto3.client("apigatewaymanagementapi", endpoint_url=WS_URL)
-    gatewayapi.post_to_connection(
-      ConnectionId=connection_id,
-      Data=json.dumps({"connection_id": connection_id}).encode('utf-8'),
-    )
-
-    return {'statusCode': 200}
+    
+    try:
+      gatewayapi.post_to_connection(
+        ConnectionId=connection_id,
+        Data=json.dumps(data).encode('utf-8'),
+      )
+      return {'statusCode': 200}
+    except Exception:
+      return {'statusCode': 400}
