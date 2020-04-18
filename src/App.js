@@ -151,7 +151,7 @@ function App() {
             <TeamTurn 
               teamTurn={teamTurn}
             />
-            <Timer />
+            {/* <Timer /> */}
           </div>
           {errorMessage}
           <Board 
