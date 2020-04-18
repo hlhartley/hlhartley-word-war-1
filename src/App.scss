@@ -15,8 +15,8 @@
       h1 {
         margin-left: 0;
       }
-
     }
+
     .buttons__container {
       display: flex;
       justify-content: center;
@@ -153,6 +153,10 @@
         height: 50px;
         margin: 0 10px;
         padding: 8px;
+      }
+
+      .game__code {
+        margin: 0 10px;
       }
     }
 
