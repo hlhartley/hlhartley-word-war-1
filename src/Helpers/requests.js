@@ -65,7 +65,7 @@ export const makeGuess = async ({ gameId, team, word }) => {
 }
 
 
-export const createPlayer = async ({ gameId, team, playerName, connectionId ,isSpymaster }) => {
+export const createPlayer = async ({ gameId, team, playerName, connectionId, isSpymaster }) => {
   let endpoint = `${BASE_URL}/game/${gameId}/team/${team}/player/${playerName}?connection_id=${connectionId}`
   if (isSpymaster) endpoint += '&is_spymaster=true';
 
@@ -83,3 +83,20 @@ export const createPlayer = async ({ gameId, team, playerName, connectionId ,isS
     return await response.json()
   }
 }
+
+export const changeTurns = async ({ gameId }) => {
+  let endpoint = `${BASE_URL}/game/${gameId}/change-turn`;
+  const response = await fetch(endpoint, 
+    {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+    })
+
+  if (response.status >= 300) {
+    return "It's not your turn"
+  } else {
+    return await response.json()
+  }
+};
