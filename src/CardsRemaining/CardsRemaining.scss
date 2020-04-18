@@ -15,11 +15,11 @@
     }
 
     &.team_1 {
-      color: $blue-team-color;
-    }
-
-    &.team_2 {
       color: $red-team-color;
+    }
+    
+    &.team_2 {
+      color: $blue-team-color;
     }
 
     &.bomb {
