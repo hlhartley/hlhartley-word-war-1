@@ -14,21 +14,31 @@
       padding: 15% 5%;
       text-align: center;
       margin: 4%;
+      cursor: pointer;
+
+      &.spymaster__guessed {
+        opacity: 0.65;
+      }
 
       &.team_1 {
         background-color: $red-team-color;
+        cursor: default;
       }
 
       &.team_2 {
         background-color: $blue-team-color;
+        cursor: default;
       }
 
       &.bomb {
         background-color: $bomb-color;
+        color: white; 
+        cursor: default;
       }
 
       &.neutral {
         background-color: $neutral-color;
+        cursor: default;
       }
     }
   }
