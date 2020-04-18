@@ -148,7 +148,6 @@ function App() {
             <h1>Word War I</h1>
             <div className="buttons__container">
               <button type="button" className="btn btn-info" onClick={() => onNewGame()}>New Game</button>
-              <button type="button" className="btn btn-outline-info" onClick={() => getGameData(gameId)}>Reset Game</button>
             </div>
           </header>
           <div className="dashboard__container">
