@@ -84,6 +84,11 @@ function App() {
     getGameData(gameId);
   }
 
+  function onNewGame() {
+    removePlayer();
+    setModal(true);
+  }
+
   function showForm() {
     return (
       <form onSubmit={handleSubmit}>
@@ -142,7 +147,7 @@ function App() {
           <header>
             <h1>Word War I</h1>
             <div className="buttons__container">
-              <button type="button" className="btn btn-info" onClick={() => setModal(true)}>New Game</button>
+              <button type="button" className="btn btn-info" onClick={() => onNewGame()}>New Game</button>
               <button type="button" className="btn btn-outline-info" onClick={() => getGameData(gameId)}>Reset Game</button>
             </div>
           </header>
