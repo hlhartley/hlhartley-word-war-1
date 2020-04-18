@@ -89,6 +89,10 @@ function App() {
     setModal(true);
   }
 
+  function playerInGame() {
+    return [...team_1, ...team_2].find(player => player.name === playerName);
+  }
+
   function showForm() {
     return (
       <form onSubmit={handleSubmit}>
@@ -134,19 +138,36 @@ function App() {
         <div className="team-members__container">
           <div className="team_1">
             <div>
-              {team_1.length === 0 ? <div>0 members</div> : team_1.map((member) => member.is_spymaster ? <div><i className="fas fa-user-secret"></i>{member.name}</div> : <div><i className="fas fa-user"></i>{member.name}</div>)}
+              {team_1.length === 0 ? <div>0 members</div> : team_1.map((member) => member.is_spymaster ? <div><i className="fas fa-user-secret"></i> {member.name}</div> : <div><i className="fas fa-user"></i>{member.name}</div>)}
             </div>
-            <button type="button" value="team_1" className="btn btn-danger" onClick={(event) => joinTeam(event.target.value)}><i className="far fa-flag"></i> Join team {`(${team_1.length})`}</button>
+            <button 
+              type="button" 
+              value="team_1" 
+              className="btn btn-danger" 
+              onClick={(event) => joinTeam(event.target.value)}
+              disabled={!gameId || !playerName}
+            ><i className="far fa-flag"></i> Join team {`(${team_1.length})`}</button>
           </div>
           <div className="team_2">
             <div>
-              {team_2.length === 0 ? <div>0 members</div> : team_2.map((member) => member.is_spymaster ? <div><i className="fas fa-user-secret"></i>{member.name}</div> : <div><i className="fas fa-user"></i>{member.name}</div>)}
+              {team_2.length === 0 ? <div>0 members</div> : team_2.map((member) => member.is_spymaster ? <div><i className="fas fa-user-secret"></i> {member.name}</div> : <div><i className="fas fa-user"></i>{member.name}</div>)}
             </div>
-            <button type="button" value="team_2" className="btn btn-primary" onClick={(event) => joinTeam(event.target.value)}><i className="far fa-flag"></i> Join team {`(${team_2.length})`}</button>
+            <button 
+              type="button" 
+              value="team_2" 
+              className="btn btn-primary" 
+              onClick={(event) => joinTeam(event.target.value)}
+              disabled={!gameId || !playerName}
+            ><i className="far fa-flag"></i> Join team {`(${team_2.length})`}</button>
           </div>
         </div>
         <div className="buttons__container">
-          <input type="submit" value="Enter Game" className="btn btn-info" />
+          <input 
+            type="submit" 
+            value="Enter Game" 
+            className="btn btn-info"
+            disabled={!gameId || !playerInGame()}
+          />
         </div>
       </form>
     )
@@ -159,7 +180,7 @@ function App() {
           <header>
             <h1>Word War I</h1>
             <div className="buttons__container">
-              <p class="game__code">Game Code: { gameId }</p>
+              <p className="game__code">Game Code: { gameId }</p>
               <button type="button" className="btn btn-info" onClick={() => onNewGame()}>New Game</button>
             </div>
           </header>
