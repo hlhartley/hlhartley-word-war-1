@@ -150,11 +150,11 @@ function App() {
             { isSpymaster 
               ? 
               <div className={team==='team_1' ? "team_1 player-role" : "team_2 player-role"}>
-                <i className="fas fa-user-secret"></i> <span>Spymaster</span>
+                <i className="fas fa-user-secret"></i> <span>{playerName}</span>
               </div> 
               : 
               <div className={team==='team_1' ? "team_1 player-role" : "team_2 player-role"}>
-                <i className="fas fa-user"></i> <span>Player</span>
+                <i className="fas fa-user"></i> <span>{playerName}</span>
               </div> 
             }
             <CardsRemaining 
