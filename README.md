@@ -5,7 +5,7 @@ We wanted to create a strategic, fun, online game for people to play (especially
 
 ## Screenshots
 *Create Game Page*
-![Create Game Screenshot](CreateGameView.png)
+![Create Game Screenshot](CreateGameSS.png)
 
 *Game Board Page (player view)*
 ![Game Board Screenshot](PlayerView.png)
