@@ -3,8 +3,7 @@ import './main.scss';
 import Board from './Board/Board';
 import CardsRemaining from './CardsRemaining/CardsRemaining';
 import TeamTurn from './TeamTurn/TeamTurn';
-import Timer from './Timer/Timer';
-import { fetchData, createPlayer } from './Helpers/requests';
+import { fetchData, createPlayer, changeTurns } from './Helpers/requests';
 import { socket, createPlayerConnection, removePlayer, getGameData } from './Helpers/socket';
 
 function App() {
@@ -77,6 +76,11 @@ function App() {
   async function joinTeam(selectedTeam) {
     setTeam(selectedTeam);
     await createNewPlayer(selectedTeam);
+    getGameData(gameId);
+  }
+
+  async function endTurn() {
+    await changeTurns({ gameId });
     getGameData(gameId);
   }
 
@@ -160,7 +164,15 @@ function App() {
             <TeamTurn 
               teamTurn={teamTurn}
             />
-            {/* <Timer /> */}
+            {
+              isSpymaster && 
+              <button 
+                type="button" 
+                className="btn btn-outline-success"
+                disabled={team !== teamTurn}
+                onClick={() => endTurn()}
+              >End Turn</button>
+            }
           </div>
           {errorMessage}
           <Board 
