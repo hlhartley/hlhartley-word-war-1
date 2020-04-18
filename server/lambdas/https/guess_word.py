@@ -48,7 +48,6 @@ def lambda_handler(event, context):
       }
     else:
       mark_word_as_guessed(conn, id_game, id_word)
-      change_turns(conn, id_game, team)
       conn.commit()
       return {
           'statusCode': 200,
