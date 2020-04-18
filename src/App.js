@@ -116,7 +116,15 @@ function App() {
           <div className="input-group-prepend">
             <span className="input-group-text" id="basic-addon1">Name</span>
           </div>
-          <input type="text" value={playerName} name="name" className="form-control" aria-label="Name" aria-describedby="basic-addon1" onChange={(event) => setPlayerName(event.target.value)}></input>
+          <input 
+            type="text" 
+            value={playerName} 
+            name="name" 
+            className="form-control" 
+            aria-label="Name" 
+            aria-describedby="basic-addon1" 
+            onChange={(event) => setPlayerName(event.target.value)}
+          ></input>
         </div>
         <div className="buttons__container">
           <button 
@@ -138,7 +146,12 @@ function App() {
         <div className="team-members__container">
           <div className="team_1">
             <div>
-              {team_1.length === 0 ? <div>0 members</div> : team_1.map((member) => member.is_spymaster ? <div><i className="fas fa-user-secret"></i> {member.name}</div> : <div><i className="fas fa-user"></i>{member.name}</div>)}
+              {team_1.length === 0 
+                ? <div>0 members</div> 
+                : team_1.map((member) => (member.is_spymaster 
+                  ? <div><i className="fas fa-user-secret"></i> {member.name}</div> 
+                  : <div><i className="fas fa-user"></i>{member.name}</div>))
+              }
             </div>
             <button 
               type="button" 
@@ -150,7 +163,12 @@ function App() {
           </div>
           <div className="team_2">
             <div>
-              {team_2.length === 0 ? <div>0 members</div> : team_2.map((member) => member.is_spymaster ? <div><i className="fas fa-user-secret"></i> {member.name}</div> : <div><i className="fas fa-user"></i>{member.name}</div>)}
+              {team_2.length === 0 
+                ? <div>0 members</div> 
+                : team_2.map((member) => (member.is_spymaster 
+                  ? <div><i className="fas fa-user-secret"></i> {member.name}</div> 
+                  : <div><i className="fas fa-user"></i>{member.name}</div>))
+                }
             </div>
             <button 
               type="button" 
