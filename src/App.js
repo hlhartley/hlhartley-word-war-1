@@ -155,12 +155,11 @@ function App() {
           </div>
           {errorMessage}
           <Board 
-            setTeam1CardCount={setTeam1CardCount}
-            setTeam2CardCount={setTeam2CardCount}
             words={words}
             gameId={gameId}
             team={teamTurn} // This should just be {team}
             setErrorMessage={setErrorMessage}
+            isSpymaster={isSpymaster}
           />
         </div>
       )
