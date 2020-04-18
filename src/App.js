@@ -143,7 +143,16 @@ function App() {
             </div>
           </header>
           <div className="dashboard__container">
-            { isSpymaster ? <div className={team_1 ? "team_1 player-role" : "team_2 player-role"}><i className="fas fa-user-secret"></i> <span>Spymaster</span></div> : <div className={team_1 ? "team_1 player-role" : "team_2 player-role"}><i className="fas fa-user"></i> <span>Player</span></div> }
+            { isSpymaster 
+              ? 
+              <div className={team==='team_1' ? "team_1 player-role" : "team_2 player-role"}>
+                <i className="fas fa-user-secret"></i> <span>Spymaster</span>
+              </div> 
+              : 
+              <div className={team==='team_1' ? "team_1 player-role" : "team_2 player-role"}>
+                <i className="fas fa-user"></i> <span>Player</span>
+              </div> 
+            }
             <CardsRemaining 
               team1CardCount={team1CardCount}
               team2CardCount={team2CardCount}
@@ -157,7 +166,7 @@ function App() {
           <Board 
             words={words}
             gameId={gameId}
-            team={teamTurn} // This should just be {team}
+            team={team}
             setErrorMessage={setErrorMessage}
             isSpymaster={isSpymaster}
           />
