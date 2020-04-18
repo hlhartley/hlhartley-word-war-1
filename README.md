@@ -29,6 +29,4 @@ We wanted to create a strategic, fun, online game for people to play (especially
 Link: https://github.com/hlhartley/hlhartley-word-war-1/tree/master/server
 
 ## Future Iterations
-- Add Timer functionality
-- Other language support
-- Chat service?
+- Refer to Issues
