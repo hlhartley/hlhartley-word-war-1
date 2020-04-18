@@ -56,6 +56,25 @@
 
       .buttons__container {
         flex-direction: row;
+
+        .player-type {
+          font-size: $mobile-font-size;
+          height: 35px;
+          color: $bomb-color;
+          background-color: transparent;
+          border-color: $bomb-color;
+          border-radius: 5px;
+          cursor: pointer;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .selected {
+          background-color: $bomb-color;
+          color: white;
+        }
       }
 
       .team-members__container {

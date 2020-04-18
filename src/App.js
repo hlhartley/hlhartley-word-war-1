@@ -98,7 +98,7 @@ function App() {
             <span className="input-group-text" id="basic-addon1">Game Code</span>
           </div>
           <input 
-            type="text" 
+            type="number" 
             name="gameId" 
             value={gameId} 
             className="form-control" 
@@ -115,9 +115,21 @@ function App() {
           <input type="text" value={playerName} name="name" className="form-control" aria-label="Name" aria-describedby="basic-addon1" onChange={(event) => setPlayerName(event.target.value)}></input>
         </div>
         <div className="buttons__container">
-          <button type="button" name="options" id="option1" className="btn btn-outline-dark" autoComplete="off" onClick={() => setSpymaster(false)}><i className="fas fa-user"></i> Player</button>
+          <button 
+            type="button" 
+            name="options" 
+            className={!isSpymaster ? "selected player-type" : "player-type"} 
+            autoComplete="off" 
+            onClick={() => setSpymaster(false)}
+          ><i className="fas fa-user"></i> Player</button>
           <span>OR</span>
-          <button type="button" name="options" id="option2" className="btn btn-outline-dark" autoComplete="off" onClick={() => setSpymaster(true)}><i className="fas fa-user-secret"></i> Spymaster</button>
+          <button 
+            type="button" 
+            name="options" 
+            className={isSpymaster ? "selected player-type" : "player-type"} 
+            autoComplete="off" 
+            onClick={() => setSpymaster(true)}
+          ><i className="fas fa-user-secret"></i> Spymaster</button>
         </div>
         <div className="team-members__container">
           <div className="team_1">
@@ -147,6 +159,7 @@ function App() {
           <header>
             <h1>Word War I</h1>
             <div className="buttons__container">
+              <p class="game__code">Game Code: { gameId }</p>
               <button type="button" className="btn btn-info" onClick={() => onNewGame()}>New Game</button>
             </div>
           </header>
