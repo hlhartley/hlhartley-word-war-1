@@ -1,6 +1,6 @@
 ## Infrastructure
 
-We are using a "serverless" setup utilizing AWS services. There are 2 Api Gateways:
+We are using a "serverless" setup utilizing AWS services. There are 2 API Gateways:
 
 1) REST API Gateway --> Lambda --> RDS(Postgres)
 2) WebSocket API Gateway --> Lambda --> RDS(Postgres)
