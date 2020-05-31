@@ -1,6 +1,7 @@
 ## Description
 We wanted to create a strategic, fun, online game for people to play (especially during the COVID-19 pandemic), while leveling up our coding skills at the same time! Rules section - coming soon!
 
+**We suspended the site temporarily due to AWS hosting costs**
 [Play Game :)](https://ecstatic-lalande-0e780a.netlify.app/)
 
 ## Screenshots
